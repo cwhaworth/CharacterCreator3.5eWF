@@ -1,0 +1,8 @@
+idRaces,RaceName,FClass,Size,Speed,AdjustStr,AdjustDex,AdjustCon,AdjustInt,AdjustWis,AdjustCha
+NULL,Dwarf,Fighter,Medium,20,0,0,2,0,0,-2
+NULL,Elf,Wizard,Medium,30,0,2,-2,0,0,0
+NULL,Gnome,Bard,Medium,20,-2,0,2,0,0,0
+NULL,Halfling,Rogue,Medium,20,-2,2,0,0,0,0
+NULL,Half-elf,Any,Medium,30,0,0,0,0,0,0
+NULL,Half-orc,Barbarian,Medium,30,2,0,0,-2,0,-2
+NULL,Human,Any,Medium,30,0,0,0,0,0,0
