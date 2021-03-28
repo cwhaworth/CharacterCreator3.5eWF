@@ -13,6 +13,7 @@ namespace CharacterCreator3._5e_WithForm
     public partial class frmMain : Form
     {
         private int menuLvl = 0;
+        private const int pointBuy = 25;
         private bool newCharUI = false;
         private Character newCharacter;
         public frmMain()
@@ -160,6 +161,13 @@ namespace CharacterCreator3._5e_WithForm
             cbxWis.Hide();
             cbxCha.Hide();
             cbxRace.Hide();
+            cbxStr.Text = "";
+            cbxDex.Text = "";
+            cbxCon.Text = "";
+            cbxInt.Text = "";
+            cbxWis.Text = "";
+            cbxCha.Text = "";
+            cbxRace.Text = "";
             newCharUI = false;
         }
         
@@ -375,7 +383,7 @@ namespace CharacterCreator3._5e_WithForm
             }            
 
             newCharacter = new Character();
-            lblAbilityRollsHeader.Text = "Point buy values, remaining: " + 25;
+            lblAbilityRollsHeader.Text = "Point buy values, remaining: " + pointBuy;
             lblAbilityRolls.Text = "8 = 0, 9 = 1, 10 = 2, 11 = 3, 12 = 4, 13 = 5, 14 = 6, 15 = 8, 16 = 10,  17 = 13, 18 = 16";
             ClearNewCharacterCbxs();
 
@@ -447,7 +455,7 @@ namespace CharacterCreator3._5e_WithForm
          * 
          * Logic for ability score combo boxes with point buy.
          */
-        private bool CheckPointBuyCap()
+        private int GetPointBuyDifference()
         {
             //Logic of Point Buy
             /* User has 25 points to distribute their ability scores
@@ -467,7 +475,7 @@ namespace CharacterCreator3._5e_WithForm
             * 18 = 16
             * check is in place to ensure points do not become less than 0
             */
-            const int pointBuy = 25;
+            
             int pointBuyCheck = 0;
             int[] abilityVals = new int[6];
 
@@ -580,10 +588,11 @@ namespace CharacterCreator3._5e_WithForm
                 }
             }
 
-            if (pointBuyCheck <= pointBuy)
-                return true;
-            else
-                return false;
+            return pointBuy - pointBuyCheck;
+        }
+        private void UpdateRemainingPointBuy()
+        {
+            lblAbilityRollsHeader.Text = "Point buy values, remaining: " + GetPointBuyDifference();
         }
         private void cbxStr_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -732,9 +741,10 @@ namespace CharacterCreator3._5e_WithForm
                 if (cbxStr.SelectedIndex > 0)
                 {
                     int value = int.Parse(cbxStr.SelectedItem.ToString());
-                    if (CheckPointBuyCap())
+                    if (GetPointBuyDifference() > -1)
                     {
                         newCharacter.SetAbilityScoreVal(0, value);
+                        UpdateRemainingPointBuy();
                         if (newCharacter.GetAbilityScoreVal(0) < 10)
                             lblStrMod.Text = newCharacter.GetAbilityScoreMod(0).ToString();
                         else
@@ -744,12 +754,14 @@ namespace CharacterCreator3._5e_WithForm
                     {
                         MessageBox.Show("You cannot pick values which exceed the point buy maximum. The Maximum is 25 points across all ability scores.");
                         cbxStr.SelectedIndex = 0;
+                        UpdateRemainingPointBuy();
                     }
                 }
                 else
                 {
                     newCharacter.SetAbilityScoreVal(0, 0);
                     lblStrMod.Text = "+0";
+                    UpdateRemainingPointBuy();
                 }  
             }
         }
@@ -905,9 +917,10 @@ namespace CharacterCreator3._5e_WithForm
                 if (cbxDex.SelectedIndex > 0)
                 {
                     int value = int.Parse(cbxDex.SelectedItem.ToString());
-                    if (CheckPointBuyCap())
+                    if (GetPointBuyDifference() > -1)
                     {
                         newCharacter.SetAbilityScoreVal(1, value);
+                        UpdateRemainingPointBuy();
                         if (newCharacter.GetAbilityScoreVal(1) < 10)
                             lblDexMod.Text = newCharacter.GetAbilityScoreMod(1).ToString();
                         else
@@ -917,12 +930,14 @@ namespace CharacterCreator3._5e_WithForm
                     {
                         MessageBox.Show("You cannot pick values which exceed the point buy maximum. The Maximum is 25 points across all ability scores.");
                         cbxDex.SelectedIndex = 0;
+                        UpdateRemainingPointBuy();
                     }
                 }
                 else
                 {
                     newCharacter.SetAbilityScoreVal(1, 0);
                     lblDexMod.Text = "+0";
+                    UpdateRemainingPointBuy();
                 }
             }
         }
@@ -1078,9 +1093,10 @@ namespace CharacterCreator3._5e_WithForm
                 if (cbxCon.SelectedIndex > 0)
                 {
                     int value = int.Parse(cbxCon.SelectedItem.ToString());
-                    if (CheckPointBuyCap())
+                    if (GetPointBuyDifference() > -1)
                     {
                         newCharacter.SetAbilityScoreVal(2, value);
+                        UpdateRemainingPointBuy();
                         if (newCharacter.GetAbilityScoreVal(2) < 10)
                             lblConMod.Text = newCharacter.GetAbilityScoreMod(2).ToString();
                         else
@@ -1090,12 +1106,14 @@ namespace CharacterCreator3._5e_WithForm
                     {
                         MessageBox.Show("You cannot pick values which exceed the point buy maximum. The Maximum is 25 points across all ability scores.");
                         cbxCon.SelectedIndex = 0;
+                        UpdateRemainingPointBuy();
                     }
                 }
                 else
                 {
                     newCharacter.SetAbilityScoreVal(2, 0);
                     lblConMod.Text = "+0";
+                    UpdateRemainingPointBuy();
                 }
             }
         }
@@ -1251,9 +1269,10 @@ namespace CharacterCreator3._5e_WithForm
                 if (cbxInt.SelectedIndex > 0)
                 {
                     int value = int.Parse(cbxInt.SelectedItem.ToString());
-                    if (CheckPointBuyCap())
+                    if (GetPointBuyDifference() > -1)
                     {
                         newCharacter.SetAbilityScoreVal(3, value);
+                        UpdateRemainingPointBuy();
                         if (newCharacter.GetAbilityScoreVal(3) < 10)
                             lblIntMod.Text = newCharacter.GetAbilityScoreMod(3).ToString();
                         else
@@ -1263,12 +1282,14 @@ namespace CharacterCreator3._5e_WithForm
                     {
                         MessageBox.Show("You cannot pick values which exceed the point buy maximum. The Maximum is 25 points across all ability scores.");
                         cbxInt.SelectedIndex = 0;
+                        UpdateRemainingPointBuy();
                     }
                 }
                 else
                 {
                     newCharacter.SetAbilityScoreVal(3, 0);
                     lblIntMod.Text = "+0";
+                    UpdateRemainingPointBuy();
                 }
             }
         }
@@ -1424,9 +1445,10 @@ namespace CharacterCreator3._5e_WithForm
                 if (cbxWis.SelectedIndex > 0)
                 {
                     int value = int.Parse(cbxWis.SelectedItem.ToString());
-                    if (CheckPointBuyCap())
+                    if (GetPointBuyDifference() > -1)
                     {
                         newCharacter.SetAbilityScoreVal(4, value);
+                        UpdateRemainingPointBuy();
                         if (newCharacter.GetAbilityScoreVal(4) < 10)
                             lblWisMod.Text = newCharacter.GetAbilityScoreMod(4).ToString();
                         else
@@ -1436,12 +1458,14 @@ namespace CharacterCreator3._5e_WithForm
                     {
                         MessageBox.Show("You cannot pick values which exceed the point buy maximum. The Maximum is 25 points across all ability scores.");
                         cbxWis.SelectedIndex = 0;
+                        UpdateRemainingPointBuy();
                     }
                 }
                 else
                 {
                     newCharacter.SetAbilityScoreVal(4, 0);
                     lblWisMod.Text = "+0";
+                    UpdateRemainingPointBuy();
                 }
             }
         }
@@ -1597,9 +1621,10 @@ namespace CharacterCreator3._5e_WithForm
                 if (cbxCha.SelectedIndex > 0)
                 {
                     int value = int.Parse(cbxCha.SelectedItem.ToString());
-                    if (CheckPointBuyCap())
+                    if (GetPointBuyDifference() > -1)
                     {
                         newCharacter.SetAbilityScoreVal(5, value);
+                        UpdateRemainingPointBuy();
                         if (newCharacter.GetAbilityScoreVal(5) < 10)
                             lblChaMod.Text = newCharacter.GetAbilityScoreMod(5).ToString();
                         else
@@ -1609,12 +1634,14 @@ namespace CharacterCreator3._5e_WithForm
                     {
                         MessageBox.Show("You cannot pick values which exceed the point buy maximum. The Maximum is 25 points across all ability scores.");
                         cbxCha.SelectedIndex = 0;
+                        UpdateRemainingPointBuy();
                     }
                 }
                 else
                 {
                     newCharacter.SetAbilityScoreVal(5, 0);
                     lblChaMod.Text = "+0";
+                    UpdateRemainingPointBuy();
                 }
             }
             
