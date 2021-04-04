@@ -7,13 +7,84 @@ using System.Threading.Tasks;
 
 namespace CharacterCreator3._5e_WithForm
 {
+    struct Attributes
+    {
+        private string charName;
+        private string raceName;
+        private string fClass;
+        private string size;
+        private int speed;
+        private int ecl;
+
+        public string CharName
+        {
+            get;
+            set;
+        }
+        public string RaceName
+        {
+            get;
+            set;
+        }
+        public string FClass
+        {
+            get;
+            set;
+        }
+        public string Size
+        {
+            get;
+            set;
+        }
+        public int Speed
+        {
+            get;
+            set;
+        }
+    }
+    struct Ability
+    {
+
+        private string name;
+        private int temp;
+        private int adjustRacial;
+        private int val;
+
+        public string Name
+        {
+            get;
+            set;
+        }
+        public int Temp
+        {
+            get;
+            set;
+        }
+
+        public int AdjustRacial
+        {
+            get;
+            set;
+        }
+        public int Val
+        {
+            get;
+            set;
+        }
+    }
     class Dwarf : Character
     {
         private Ability[] abilityScores = new Ability[6];
         private Attributes attributes = new Attributes();
 
+        private string[] traits = {"Appraise +2: Stone & Metal", "Attack Roll +1: Gobliniods",
+            "Attack Roll +1: Orcs & Half-orcs", "Craft +2: Stone & Metal", "Darkvision", 
+            "Dodge Bonus +4: Giant type monsters", "Magic Resistance +2", "Poison Resistance +2", 
+            "Stability", "Stonecunning", "Weapon Familiarity: Waraxes", "Weapon Familiarity: Urgoshes"};
+        private int[] alignment = new int[2];
+
+        private List<string> languages = new List<string>();
         private List<int> hitDice = new List<int>();
-        private int[,] alignment = new int[3, 3];
 
         private int ecl;
 
@@ -130,6 +201,9 @@ namespace CharacterCreator3._5e_WithForm
                         break;
                 }
             }
+
+            languages.Add("Common");
+            languages.Add("Dwarven");
         }
         private void WriteAbilityScoreNames()
         {
@@ -164,8 +238,15 @@ namespace CharacterCreator3._5e_WithForm
         private Ability[] abilityScores = new Ability[6];
         private Attributes attributes = new Attributes();
 
+        private string[] traits = {"Attack Roll +1: Gobliniods", "Attack Roll +1: Kobolds", "Craft +2: Alchemy",
+            "Dodge Bonus +4: Giant type monsters", "Illusion Potency +1", "Illusion Resistance +2", 
+            "Listen +2", "Low-light Vision", "Spell-like Ability: Dancing Lights 1/day",
+            "Spell-like Ability: Ghost Sound 1/day", "Spell-like Ability: Prestidigitation 1/day",
+            "Spell-like Ability: Speak with Animals 1/day", "Weapon Familiarity: Hooked Hammers"};
+        private int[] alignment = new int[2];
+
+        private List<string> languages = new List<string>();
         private List<int> hitDice = new List<int>();
-        private int[,] alignment = new int[3, 3];
 
         private int ecl;
 
@@ -282,6 +363,9 @@ namespace CharacterCreator3._5e_WithForm
                         break;
                 }
             }
+
+            languages.Add("Common");
+            languages.Add("Gnome");
         }
         private void WriteAbilityScoreNames()
         {
@@ -316,8 +400,11 @@ namespace CharacterCreator3._5e_WithForm
         private Ability[] abilityScores = new Ability[6];
         private Attributes attributes = new Attributes();
 
+        private string[] traits = {"+1 feat at 1st level", "+4 skill points at 1st level", "+1 skill point per level"};
+        private int[] alignment = new int[2];
+
+        private List<string> languages = new List<string>();
         private List<int> hitDice = new List<int>();
-        private int[,] alignment = new int[3, 3];
 
         private int ecl;
 
@@ -434,6 +521,8 @@ namespace CharacterCreator3._5e_WithForm
                         break;
                 }
             }
+
+            languages.Add("Common");
         }
         private void WriteAbilityScoreNames()
         {

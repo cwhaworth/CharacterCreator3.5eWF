@@ -6,71 +6,7 @@ using System.Text;
 
 namespace CharacterCreator3._5e_WithForm
 {
-    struct Attributes
-    {
-        private string charName;
-        private string raceName;
-        private string fClass;
-        private string size;
-        private int speed;
-        private int ecl;
-
-        public string CharName
-        {
-            get;
-            set;
-        }
-        public string RaceName
-        {
-            get;
-            set;
-        }
-        public string FClass
-        {
-            get;
-            set;
-        }
-        public string Size
-        {
-            get;
-            set;
-        }
-        public int Speed
-        {
-            get;
-            set;
-        }
-    }
-    struct Ability
-    {
-
-        private string name;
-        private int temp;
-        private int adjustRacial;
-        private int val;
-
-        public string Name
-        {
-            get;
-            set;
-        }
-        public int Temp
-        {
-            get;
-            set;
-        }
-
-        public int AdjustRacial
-        {
-            get;
-            set;
-        }
-        public int Val
-        {
-            get;
-            set;
-        }
-    }
+    
     abstract class Character
     {
         //Ability Score variable Gets and Sets

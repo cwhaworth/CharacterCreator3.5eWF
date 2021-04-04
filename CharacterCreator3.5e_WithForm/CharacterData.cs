@@ -103,6 +103,8 @@ namespace CharacterCreator3._5e_WithForm
             column.Unique = false;
             races.Columns.Add(column);
 
+            //Investigate a column for array type for bonus languages
+
             row = races.NewRow();
             row["id"] = 100;
             row["RaceName"] = "Dwarf";
