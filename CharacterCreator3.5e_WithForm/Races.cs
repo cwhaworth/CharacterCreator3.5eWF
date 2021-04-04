@@ -233,6 +233,166 @@ namespace CharacterCreator3._5e_WithForm
             }
         }
     }
+    class Elf : Character
+    {
+        private Ability[] abilityScores = new Ability[6];
+        private Attributes attributes = new Attributes();
+
+        private string[] traits = {"Immunity to magical sleep", "Listen +2", "Low-light Vision", "Search +2",
+        "Spot +2", "Weapon Proficiency: Longbow", "Weapon Proficiency: Longsword", "Weapon Proficiency: Rapier",
+        "Weapon Proficiency: Shortbow"};
+        private int[] alignment = new int[2];
+
+        private List<string> languages = new List<string>();
+        private List<int> hitDice = new List<int>();
+
+        private int ecl;
+
+        //Ability Score variable Gets and Sets
+        //Gets
+        public override string GetAbilityScoreName(int i)
+        {
+            return abilityScores[i].Name;
+        }
+        public override int GetAbilityScoreRacialAdjustment(int i)
+        {
+            return abilityScores[i].AdjustRacial;
+        }
+        public override int GetAbilityScoreVal(int i)
+        {
+            return abilityScores[i].Val;
+        }
+        public override int GetAbilityScoreMod(int i)
+        {
+            int modVal = abilityScores[i].Val + abilityScores[i].AdjustRacial + abilityScores[i].Temp;
+            if (modVal > 10)
+            {
+                return (modVal - 10) / 2;
+            }
+            else if (modVal < 10)
+            {
+                return (modVal / 2) + -5;
+            }
+            return 0;
+        }
+        public override int GetAbilityScoresLength()
+        {
+            return abilityScores.Length;
+        }
+        //Sets
+        public override void SetAbilityScoreVal(int i, int v)
+        {
+            abilityScores[i].Val = v;
+        }
+        public override void SetAdjustRacial(int i, int v)
+        {
+            abilityScores[i].AdjustRacial = v;
+        }
+        //attributes struct Gets and Sets
+        //Gets
+        public override string GetCharacterRaceName()
+        {
+            return attributes.RaceName;
+        }
+        public override string GetCharacterFavoriteClass()
+        {
+            return attributes.FClass;
+        }
+        public override string GetCharacterSize()
+        {
+            return attributes.Size;
+        }
+        public override int GetCharacterSpeed()
+        {
+            return attributes.Speed;
+        }
+        //Sets
+        public override void SetCharacterRaceName(string i)
+        {
+            attributes.RaceName = i;
+        }
+        public override void SetCharacterFavoriteClass(string i)
+        {
+            attributes.FClass = i;
+        }
+        public override void SetCharacterSpeed(int i)
+        {
+            attributes.Speed = i;
+        }
+        public override void SetCharacterSize(string i)
+        {
+            attributes.Size = i;
+        }
+        public Elf()
+        {
+            //101: index of human data row in table races
+            CharacterData charData = new CharacterData();
+            DataTable races = charData.GetRaces();
+            DataRow race = races.Rows.Find(101);
+
+            attributes.CharName = "Name";
+            attributes.RaceName = race.Field<string>("RaceName");
+            attributes.FClass = race.Field<string>("FavoriteClass");
+            attributes.Size = race.Field<string>("Size");
+            attributes.Speed = race.Field<int>("Speed");
+
+            WriteAbilityScoreNames();
+            for (int i = 0; i < abilityScores.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustStr");
+                        break;
+                    case 1:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustDex");
+                        break;
+                    case 2:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustCon");
+                        break;
+                    case 3:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustInt");
+                        break;
+                    case 4:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustWis");
+                        break;
+                    case 5:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustCha");
+                        break;
+                }
+            }
+
+            languages.Add("Common");
+            languages.Add("Elven");
+        }
+        private void WriteAbilityScoreNames()
+        {
+            for (int i = 0; i < abilityScores.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        abilityScores[i].Name = "Strength";
+                        break;
+                    case 1:
+                        abilityScores[i].Name = "Dexterity";
+                        break;
+                    case 2:
+                        abilityScores[i].Name = "Constitution";
+                        break;
+                    case 3:
+                        abilityScores[i].Name = "Intelligence";
+                        break;
+                    case 4:
+                        abilityScores[i].Name = "Wisdom";
+                        break;
+                    case 5:
+                        abilityScores[i].Name = "Charisma";
+                        break;
+                }
+            }
+        }
+    }
     class Gnome : Character
     {
         private Ability[] abilityScores = new Ability[6];
@@ -366,6 +526,482 @@ namespace CharacterCreator3._5e_WithForm
 
             languages.Add("Common");
             languages.Add("Gnome");
+        }
+        private void WriteAbilityScoreNames()
+        {
+            for (int i = 0; i < abilityScores.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        abilityScores[i].Name = "Strength";
+                        break;
+                    case 1:
+                        abilityScores[i].Name = "Dexterity";
+                        break;
+                    case 2:
+                        abilityScores[i].Name = "Constitution";
+                        break;
+                    case 3:
+                        abilityScores[i].Name = "Intelligence";
+                        break;
+                    case 4:
+                        abilityScores[i].Name = "Wisdom";
+                        break;
+                    case 5:
+                        abilityScores[i].Name = "Charisma";
+                        break;
+                }
+            }
+        }
+    }
+    class Halfling : Character
+    {
+        private Ability[] abilityScores = new Ability[6];
+        private Attributes attributes = new Attributes();
+
+        private string[] traits = {"Attack Roll +1: Thrown Weapons & Slings", "Climb +2", "Jump +2",
+            "Listen +2", "Move Silently +2", "Saving throws +1", "Fear Resistance +2"};
+        private int[] alignment = new int[2];
+
+        private List<string> languages = new List<string>();
+        private List<int> hitDice = new List<int>();
+
+        private int ecl;
+
+        //Ability Score variable Gets and Sets
+        //Gets
+        public override string GetAbilityScoreName(int i)
+        {
+            return abilityScores[i].Name;
+        }
+        public override int GetAbilityScoreRacialAdjustment(int i)
+        {
+            return abilityScores[i].AdjustRacial;
+        }
+        public override int GetAbilityScoreVal(int i)
+        {
+            return abilityScores[i].Val;
+        }
+        public override int GetAbilityScoreMod(int i)
+        {
+            int modVal = abilityScores[i].Val + abilityScores[i].AdjustRacial + abilityScores[i].Temp;
+            if (modVal > 10)
+            {
+                return (modVal - 10) / 2;
+            }
+            else if (modVal < 10)
+            {
+                return (modVal / 2) + -5;
+            }
+            return 0;
+        }
+        public override int GetAbilityScoresLength()
+        {
+            return abilityScores.Length;
+        }
+        //Sets
+        public override void SetAbilityScoreVal(int i, int v)
+        {
+            abilityScores[i].Val = v;
+        }
+        public override void SetAdjustRacial(int i, int v)
+        {
+            abilityScores[i].AdjustRacial = v;
+        }
+        //attributes struct Gets and Sets
+        //Gets
+        public override string GetCharacterRaceName()
+        {
+            return attributes.RaceName;
+        }
+        public override string GetCharacterFavoriteClass()
+        {
+            return attributes.FClass;
+        }
+        public override string GetCharacterSize()
+        {
+            return attributes.Size;
+        }
+        public override int GetCharacterSpeed()
+        {
+            return attributes.Speed;
+        }
+        //Sets
+        public override void SetCharacterRaceName(string i)
+        {
+            attributes.RaceName = i;
+        }
+        public override void SetCharacterFavoriteClass(string i)
+        {
+            attributes.FClass = i;
+        }
+        public override void SetCharacterSpeed(int i)
+        {
+            attributes.Speed = i;
+        }
+        public override void SetCharacterSize(string i)
+        {
+            attributes.Size = i;
+        }
+        public Halfling()
+        {
+            //106: index of human data row in table races
+            CharacterData charData = new CharacterData();
+            DataTable races = charData.GetRaces();
+            DataRow race = races.Rows.Find(106);
+
+            attributes.CharName = "Name";
+            attributes.RaceName = race.Field<string>("RaceName");
+            attributes.FClass = race.Field<string>("FavoriteClass");
+            attributes.Size = race.Field<string>("Size");
+            attributes.Speed = race.Field<int>("Speed");
+
+            WriteAbilityScoreNames();
+            for (int i = 0; i < abilityScores.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustStr");
+                        break;
+                    case 1:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustDex");
+                        break;
+                    case 2:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustCon");
+                        break;
+                    case 3:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustInt");
+                        break;
+                    case 4:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustWis");
+                        break;
+                    case 5:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustCha");
+                        break;
+                }
+            }
+
+            languages.Add("Common");
+            languages.Add("Halfling");
+        }
+        private void WriteAbilityScoreNames()
+        {
+            for (int i = 0; i < abilityScores.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        abilityScores[i].Name = "Strength";
+                        break;
+                    case 1:
+                        abilityScores[i].Name = "Dexterity";
+                        break;
+                    case 2:
+                        abilityScores[i].Name = "Constitution";
+                        break;
+                    case 3:
+                        abilityScores[i].Name = "Intelligence";
+                        break;
+                    case 4:
+                        abilityScores[i].Name = "Wisdom";
+                        break;
+                    case 5:
+                        abilityScores[i].Name = "Charisma";
+                        break;
+                }
+            }
+        }
+    }
+    class HalfElf : Character
+    {
+        private Ability[] abilityScores = new Ability[6];
+        private Attributes attributes = new Attributes();
+
+        private string[] traits = {"Diplomacy +2", "Elven Blood", "Gather Information +2",
+            "Immunity to magical sleep", "Listen +1", "Low-light Vision", "Search +1", "Spot +1" };
+        private int[] alignment = new int[2];
+
+        private List<string> languages = new List<string>();
+        private List<int> hitDice = new List<int>();
+
+        private int ecl;
+
+        //Ability Score variable Gets and Sets
+        //Gets
+        public override string GetAbilityScoreName(int i)
+        {
+            return abilityScores[i].Name;
+        }
+        public override int GetAbilityScoreRacialAdjustment(int i)
+        {
+            return abilityScores[i].AdjustRacial;
+        }
+        public override int GetAbilityScoreVal(int i)
+        {
+            return abilityScores[i].Val;
+        }
+        public override int GetAbilityScoreMod(int i)
+        {
+            int modVal = abilityScores[i].Val + abilityScores[i].AdjustRacial + abilityScores[i].Temp;
+            if (modVal > 10)
+            {
+                return (modVal - 10) / 2;
+            }
+            else if (modVal < 10)
+            {
+                return (modVal / 2) + -5;
+            }
+            return 0;
+        }
+        public override int GetAbilityScoresLength()
+        {
+            return abilityScores.Length;
+        }
+        //Sets
+        public override void SetAbilityScoreVal(int i, int v)
+        {
+            abilityScores[i].Val = v;
+        }
+        public override void SetAdjustRacial(int i, int v)
+        {
+            abilityScores[i].AdjustRacial = v;
+        }
+        //attributes struct Gets and Sets
+        //Gets
+        public override string GetCharacterRaceName()
+        {
+            return attributes.RaceName;
+        }
+        public override string GetCharacterFavoriteClass()
+        {
+            return attributes.FClass;
+        }
+        public override string GetCharacterSize()
+        {
+            return attributes.Size;
+        }
+        public override int GetCharacterSpeed()
+        {
+            return attributes.Speed;
+        }
+        //Sets
+        public override void SetCharacterRaceName(string i)
+        {
+            attributes.RaceName = i;
+        }
+        public override void SetCharacterFavoriteClass(string i)
+        {
+            attributes.FClass = i;
+        }
+        public override void SetCharacterSpeed(int i)
+        {
+            attributes.Speed = i;
+        }
+        public override void SetCharacterSize(string i)
+        {
+            attributes.Size = i;
+        }
+        public HalfElf()
+        {
+            //106: index of human data row in table races
+            CharacterData charData = new CharacterData();
+            DataTable races = charData.GetRaces();
+            DataRow race = races.Rows.Find(106);
+
+            attributes.CharName = "Name";
+            attributes.RaceName = race.Field<string>("RaceName");
+            attributes.FClass = race.Field<string>("FavoriteClass");
+            attributes.Size = race.Field<string>("Size");
+            attributes.Speed = race.Field<int>("Speed");
+
+            WriteAbilityScoreNames();
+            for (int i = 0; i < abilityScores.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustStr");
+                        break;
+                    case 1:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustDex");
+                        break;
+                    case 2:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustCon");
+                        break;
+                    case 3:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustInt");
+                        break;
+                    case 4:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustWis");
+                        break;
+                    case 5:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustCha");
+                        break;
+                }
+            }
+
+            languages.Add("Common");
+            languages.Add("Elven");
+        }
+        private void WriteAbilityScoreNames()
+        {
+            for (int i = 0; i < abilityScores.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        abilityScores[i].Name = "Strength";
+                        break;
+                    case 1:
+                        abilityScores[i].Name = "Dexterity";
+                        break;
+                    case 2:
+                        abilityScores[i].Name = "Constitution";
+                        break;
+                    case 3:
+                        abilityScores[i].Name = "Intelligence";
+                        break;
+                    case 4:
+                        abilityScores[i].Name = "Wisdom";
+                        break;
+                    case 5:
+                        abilityScores[i].Name = "Charisma";
+                        break;
+                }
+            }
+        }
+    }
+    class HalfOrc : Character
+    {
+        private Ability[] abilityScores = new Ability[6];
+        private Attributes attributes = new Attributes();
+
+        private string[] traits = { "Darkvision", "Orc Blood"};
+        private int[] alignment = new int[2];
+
+        private List<string> languages = new List<string>();
+        private List<int> hitDice = new List<int>();
+
+        private int ecl;
+
+        //Ability Score variable Gets and Sets
+        //Gets
+        public override string GetAbilityScoreName(int i)
+        {
+            return abilityScores[i].Name;
+        }
+        public override int GetAbilityScoreRacialAdjustment(int i)
+        {
+            return abilityScores[i].AdjustRacial;
+        }
+        public override int GetAbilityScoreVal(int i)
+        {
+            return abilityScores[i].Val;
+        }
+        public override int GetAbilityScoreMod(int i)
+        {
+            int modVal = abilityScores[i].Val + abilityScores[i].AdjustRacial + abilityScores[i].Temp;
+            if (modVal > 10)
+            {
+                return (modVal - 10) / 2;
+            }
+            else if (modVal < 10)
+            {
+                return (modVal / 2) + -5;
+            }
+            return 0;
+        }
+        public override int GetAbilityScoresLength()
+        {
+            return abilityScores.Length;
+        }
+        //Sets
+        public override void SetAbilityScoreVal(int i, int v)
+        {
+            abilityScores[i].Val = v;
+        }
+        public override void SetAdjustRacial(int i, int v)
+        {
+            abilityScores[i].AdjustRacial = v;
+        }
+        //attributes struct Gets and Sets
+        //Gets
+        public override string GetCharacterRaceName()
+        {
+            return attributes.RaceName;
+        }
+        public override string GetCharacterFavoriteClass()
+        {
+            return attributes.FClass;
+        }
+        public override string GetCharacterSize()
+        {
+            return attributes.Size;
+        }
+        public override int GetCharacterSpeed()
+        {
+            return attributes.Speed;
+        }
+        //Sets
+        public override void SetCharacterRaceName(string i)
+        {
+            attributes.RaceName = i;
+        }
+        public override void SetCharacterFavoriteClass(string i)
+        {
+            attributes.FClass = i;
+        }
+        public override void SetCharacterSpeed(int i)
+        {
+            attributes.Speed = i;
+        }
+        public override void SetCharacterSize(string i)
+        {
+            attributes.Size = i;
+        }
+        public HalfOrc()
+        {
+            //106: index of human data row in table races
+            CharacterData charData = new CharacterData();
+            DataTable races = charData.GetRaces();
+            DataRow race = races.Rows.Find(106);
+
+            attributes.CharName = "Name";
+            attributes.RaceName = race.Field<string>("RaceName");
+            attributes.FClass = race.Field<string>("FavoriteClass");
+            attributes.Size = race.Field<string>("Size");
+            attributes.Speed = race.Field<int>("Speed");
+
+            WriteAbilityScoreNames();
+            for (int i = 0; i < abilityScores.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustStr");
+                        break;
+                    case 1:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustDex");
+                        break;
+                    case 2:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustCon");
+                        break;
+                    case 3:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustInt");
+                        break;
+                    case 4:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustWis");
+                        break;
+                    case 5:
+                        abilityScores[i].AdjustRacial = race.Field<int>("AdjustCha");
+                        break;
+                }
+            }
+
+            languages.Add("Common");
+            languages.Add("Orc");
         }
         private void WriteAbilityScoreNames()
         {
