@@ -83,6 +83,7 @@ namespace CharacterCreator3._5e_WithForm
             "Stability", "Stonecunning", "Weapon Familiarity: Waraxes", "Weapon Familiarity: Urgoshes"};
         private int[] alignment = new int[2];
 
+        private List<CharacterClass> classes = new List<CharacterClass>();
         private List<string> languages = new List<string>();
         private List<int> hitDice = new List<int>();
 
@@ -239,7 +240,7 @@ namespace CharacterCreator3._5e_WithForm
         private Attributes attributes = new Attributes();
 
         private string[] traits = {"Immunity to magical sleep", "Listen +2", "Low-light Vision", "Search +2",
-        "Spot +2", "Weapon Proficiency: Longbow", "Weapon Proficiency: Longsword", "Weapon Proficiency: Rapier",
+        "Spot +2", "Auto search: Hidden Doors", "Weapon Proficiency: Longbow", "Weapon Proficiency: Longsword", "Weapon Proficiency: Rapier",
         "Weapon Proficiency: Shortbow"};
         private int[] alignment = new int[2];
 

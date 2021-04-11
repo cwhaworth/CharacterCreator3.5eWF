@@ -6,7 +6,6 @@ using System.Text;
 
 namespace CharacterCreator3._5e_WithForm
 {
-    
     abstract class Character
     {
         //Ability Score variable Gets and Sets

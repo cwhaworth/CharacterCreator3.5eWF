@@ -451,12 +451,12 @@ namespace CharacterCreator3._5e_WithForm
             cbxInt.Items.Clear();
             cbxWis.Items.Clear();
             cbxCha.Items.Clear();
-            cbxStr.Items.Add("");
-            cbxDex.Items.Add("");
-            cbxCon.Items.Add("");
-            cbxInt.Items.Add("");
-            cbxWis.Items.Add("");
-            cbxCha.Items.Add("");
+            cbxStr.Items.Add(null);
+            cbxDex.Items.Add(null);
+            cbxCon.Items.Add(null);
+            cbxInt.Items.Add(null);
+            cbxWis.Items.Add(null);
+            cbxCha.Items.Add(null);
         }
 
         /* Logic for ability score combo boxes check if a value has been used by 
@@ -604,6 +604,18 @@ namespace CharacterCreator3._5e_WithForm
         {
             lblAbilityRollsHeader.Text = "Point buy values, remaining: " + GetPointBuyDifference();
         }
+        private int CalcAbilityScoreMod(int i)
+        {
+            if (i > 10)
+            {
+                return (i - 10) / 2;
+            }
+            else if (i < 10)
+            {
+                return (i / 2) + -5;
+            }
+            return 0;
+        }
         private void cbxStr_SelectedIndexChanged(object sender, EventArgs e)
         {
             /* Index of Str Ability = 0
@@ -626,7 +638,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 0:
                             if ((cbxStr.SelectedIndex == cbxDex.SelectedIndex) && (cbxStr.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(1) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Dexterity.", "Error");
                                 cbxStr.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -634,17 +646,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxStr.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(0, int.Parse(cbxStr.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(0) < 10)
-                                        lblStrMod.Text = newCharacter.GetAbilityScoreMod(0).ToString();
+                                    if (int.Parse(cbxStr.SelectedItem.ToString() + int.Parse(lblStrRacialAdjust.Text)) < 10)
+                                        lblStrMod.Text = CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem.ToString()) + int.Parse(lblStrRacialAdjust.Text)).ToString();
                                     else
-                                        lblStrMod.Text = "+" + newCharacter.GetAbilityScoreMod(0);
-                                    */
+                                        lblStrMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem.ToString()) + int.Parse(lblStrRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(0, 0);
                                     lblStrMod.Text = "+0";
                                 }
                             }
@@ -652,7 +660,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 1:
                             if ((cbxStr.SelectedIndex == cbxCon.SelectedIndex) && (cbxStr.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(2) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Constitution.", "Error");
                                 cbxStr.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -660,17 +668,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxStr.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(0, int.Parse(cbxStr.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(0) < 10)
-                                        lblStrMod.Text = newCharacter.GetAbilityScoreMod(0).ToString();
+                                    if (int.Parse(cbxStr.SelectedItem.ToString() + int.Parse(lblStrRacialAdjust.Text)) < 10)
+                                        lblStrMod.Text = CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem.ToString()) + int.Parse(lblStrRacialAdjust.Text)).ToString();
                                     else
-                                        lblStrMod.Text = "+" + newCharacter.GetAbilityScoreMod(0);
-                                    */
+                                        lblStrMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem.ToString()) + int.Parse(lblStrRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(0, 0);
                                     lblStrMod.Text = "+0";
                                 }
                             }
@@ -678,7 +682,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 2:
                             if ((cbxStr.SelectedIndex == cbxInt.SelectedIndex) && (cbxStr.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(3) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Intelligence.", "Error");
                                 cbxStr.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -686,16 +690,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxStr.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(0, int.Parse(cbxStr.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(0) < 10)
-                                        lblStrMod.Text = newCharacter.GetAbilityScoreMod(0).ToString();
+                                    if (int.Parse(cbxStr.SelectedItem.ToString() + int.Parse(lblStrRacialAdjust.Text)) < 10)
+                                        lblStrMod.Text = CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem.ToString()) + int.Parse(lblStrRacialAdjust.Text)).ToString();
                                     else
-                                        lblStrMod.Text = "+" + newCharacter.GetAbilityScoreMod(0);*/
+                                        lblStrMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem.ToString()) + int.Parse(lblStrRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(0, 0);
                                     lblStrMod.Text = "+0";
                                 }
                             }
@@ -703,7 +704,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 3:
                             if ((cbxStr.SelectedIndex == cbxWis.SelectedIndex) && (cbxStr.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(4) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Wisdom.", "Error");
                                 cbxStr.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -711,16 +712,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxStr.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(0, int.Parse(cbxStr.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(0) < 10)
-                                        lblStrMod.Text = newCharacter.GetAbilityScoreMod(0).ToString();
+                                    if (int.Parse(cbxStr.SelectedItem.ToString() + int.Parse(lblStrRacialAdjust.Text)) < 10)
+                                        lblStrMod.Text = CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem.ToString()) + int.Parse(lblStrRacialAdjust.Text)).ToString();
                                     else
-                                        lblStrMod.Text = "+" + newCharacter.GetAbilityScoreMod(0);*/
+                                        lblStrMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem.ToString()) + int.Parse(lblStrRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(0, 0);
                                     lblStrMod.Text = "+0";
                                 }
                             }
@@ -728,7 +726,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 4:
                             if ((cbxStr.SelectedIndex == cbxCha.SelectedIndex) && (cbxStr.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(5) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Charisma.", "Error");
                                 cbxStr.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -736,16 +734,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxStr.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(0, int.Parse(cbxStr.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(0) < 10)
-                                        lblStrMod.Text = newCharacter.GetAbilityScoreMod(0).ToString();
+                                    if (int.Parse(cbxStr.SelectedItem.ToString() + int.Parse(lblStrRacialAdjust.Text)) < 10)
+                                        lblStrMod.Text = CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem.ToString()) + int.Parse(lblStrRacialAdjust.Text)).ToString();
                                     else
-                                        lblStrMod.Text = "+" + newCharacter.GetAbilityScoreMod(0);*/
+                                        lblStrMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem.ToString()) + int.Parse(lblStrRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(0, 0);
                                     lblStrMod.Text = "+0";
                                 }
                             }
@@ -793,14 +788,6 @@ namespace CharacterCreator3._5e_WithForm
 
             if (menuLvl == 101)
             {
-                /* Index of Str Ability = 0
-             * Index of Dex Ability = 1
-             * Index of Con Ability = 2
-             * Index of Int Ability = 3
-             * Index of Wis Ability = 4
-             * Index of Cha Ability = 5
-             */
-
                 for (int i = 0; i < 5; i++)
                 {
                     switch (i)
@@ -808,7 +795,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 0:
                             if ((cbxDex.SelectedIndex == cbxStr.SelectedIndex) && (cbxDex.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(0) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Strength.", "Error");
                                 cbxDex.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -816,16 +803,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxDex.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(1, int.Parse(cbxDex.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(1) < 10)
-                                        lblDexMod.Text = newCharacter.GetAbilityScoreMod(1).ToString();
+                                    if (int.Parse(cbxDex.SelectedItem.ToString() + int.Parse(lblDexRacialAdjust.Text)) < 10)
+                                        lblDexMod.Text = CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem.ToString()) + int.Parse(lblDexRacialAdjust.Text)).ToString();
                                     else
-                                        lblDexMod.Text = "+" + newCharacter.GetAbilityScoreMod(1);*/
+                                        lblDexMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem.ToString()) + int.Parse(lblDexRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(1, 0);
                                     lblDexMod.Text = "+0";
                                 }
                             }
@@ -833,7 +817,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 1:
                             if ((cbxDex.SelectedIndex == cbxCon.SelectedIndex) && (cbxDex.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(2) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Constitution.", "Error");
                                 cbxDex.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -841,16 +825,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxDex.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(1, int.Parse(cbxDex.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(1) < 10)
-                                        lblDexMod.Text = newCharacter.GetAbilityScoreMod(1).ToString();
+                                    if (int.Parse(cbxDex.SelectedItem.ToString() + int.Parse(lblDexRacialAdjust.Text)) < 10)
+                                        lblDexMod.Text = CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem.ToString()) + int.Parse(lblDexRacialAdjust.Text)).ToString();
                                     else
-                                        lblDexMod.Text = "+" + newCharacter.GetAbilityScoreMod(1);*/
+                                        lblDexMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem.ToString()) + int.Parse(lblDexRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(1, 0);
                                     lblDexMod.Text = "+0";
                                 }
                             }
@@ -858,7 +839,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 2:
                             if ((cbxDex.SelectedIndex == cbxInt.SelectedIndex) && (cbxDex.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(3) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Intelligence.", "Error");
                                 cbxDex.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -866,16 +847,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxDex.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(1, int.Parse(cbxDex.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(1) < 10)
-                                        lblDexMod.Text = newCharacter.GetAbilityScoreMod(1).ToString();
+                                    if (int.Parse(cbxDex.SelectedItem.ToString() + int.Parse(lblDexRacialAdjust.Text)) < 10)
+                                        lblDexMod.Text = CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem.ToString()) + int.Parse(lblDexRacialAdjust.Text)).ToString();
                                     else
-                                        lblDexMod.Text = "+" + newCharacter.GetAbilityScoreMod(1);*/
+                                        lblDexMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem.ToString()) + int.Parse(lblDexRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(1, 0);
                                     lblDexMod.Text = "+0";
                                 }
                             }
@@ -883,7 +861,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 3:
                             if ((cbxDex.SelectedIndex == cbxWis.SelectedIndex) && (cbxDex.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(4) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Wisdom.", "Error");
                                 cbxDex.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -891,16 +869,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxDex.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(1, int.Parse(cbxDex.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(1) < 10)
-                                        lblDexMod.Text = newCharacter.GetAbilityScoreMod(1).ToString();
+                                    if (int.Parse(cbxDex.SelectedItem.ToString() + int.Parse(lblDexRacialAdjust.Text)) < 10)
+                                        lblDexMod.Text = CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem.ToString()) + int.Parse(lblDexRacialAdjust.Text)).ToString();
                                     else
-                                        lblDexMod.Text = "+" + newCharacter.GetAbilityScoreMod(1);*/
+                                        lblDexMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem.ToString()) + int.Parse(lblDexRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(1, 0);
                                     lblDexMod.Text = "+0";
                                 }
                             }
@@ -908,7 +883,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 4:
                             if ((cbxDex.SelectedIndex == cbxCha.SelectedIndex) && (cbxDex.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(5) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Charisma.", "Error");
                                 cbxDex.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -916,16 +891,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxDex.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(1, int.Parse(cbxDex.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(1) < 10)
-                                        lblDexMod.Text = newCharacter.GetAbilityScoreMod(1).ToString();
+                                    if (int.Parse(cbxDex.SelectedItem.ToString() + int.Parse(lblDexRacialAdjust.Text)) < 10)
+                                        lblDexMod.Text = CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem.ToString()) + int.Parse(lblDexRacialAdjust.Text)).ToString();
                                     else
-                                        lblDexMod.Text = "+" + newCharacter.GetAbilityScoreMod(1);*/
+                                        lblDexMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem.ToString()) + int.Parse(lblDexRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(1, 0);
                                     lblDexMod.Text = "+0";
                                 }
                             }
@@ -974,14 +946,6 @@ namespace CharacterCreator3._5e_WithForm
 
             if (menuLvl == 101)
             {
-                /* Index of Str Ability = 0
-             * Index of Dex Ability = 1
-             * Index of Con Ability = 2
-             * Index of Int Ability = 3
-             * Index of Wis Ability = 4
-             * Index of Cha Ability = 5
-             */
-
                 for (int i = 0; i < 5; i++)
                 {
                     switch (i)
@@ -989,7 +953,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 0:
                             if ((cbxCon.SelectedIndex == cbxStr.SelectedIndex) && (cbxCon.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(0) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Strength.", "Error");
                                 cbxCon.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -997,17 +961,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxCon.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(2, int.Parse(cbxCon.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(2) < 10)
-                                        lblConMod.Text = newCharacter.GetAbilityScoreMod(2).ToString();
+                                    if (int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text) < 10)
+                                        lblConMod.Text = CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text)).ToString();
                                     else
-                                        lblConMod.Text = "+" + newCharacter.GetAbilityScoreMod(2);
-                                    */
+                                        lblConMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(2, 0);
                                     lblConMod.Text = "+0";
                                 }
                             }
@@ -1015,7 +975,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 1:
                             if ((cbxCon.SelectedIndex == cbxDex.SelectedIndex) && (cbxCon.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(1) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Dexterity.", "Error");
                                 cbxCon.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1023,16 +983,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxCon.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(2, int.Parse(cbxCon.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(2) < 10)
-                                        lblConMod.Text = newCharacter.GetAbilityScoreMod(2).ToString();
+                                    if (int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text) < 10)
+                                        lblConMod.Text = CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text)).ToString();
                                     else
-                                        lblConMod.Text = "+" + newCharacter.GetAbilityScoreMod(2);*/
+                                        lblConMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(2, 0);
                                     lblConMod.Text = "+0";
                                 }
                             }
@@ -1040,7 +997,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 2:
                             if ((cbxCon.SelectedIndex == cbxInt.SelectedIndex) && (cbxCon.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(3) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Intelligence.", "Error");
                                 cbxCon.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1048,17 +1005,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxCon.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(2, int.Parse(cbxCon.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(2) < 10)
-                                        lblConMod.Text = newCharacter.GetAbilityScoreMod(2).ToString();
+                                    if (int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text) < 10)
+                                        lblConMod.Text = CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text)).ToString();
                                     else
-                                        lblConMod.Text = "+" + newCharacter.GetAbilityScoreMod(2);
-                                    */
+                                        lblConMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(2, 0);
                                     lblConMod.Text = "+0";
                                 }
                             }
@@ -1066,7 +1019,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 3:
                             if ((cbxCon.SelectedIndex == cbxWis.SelectedIndex) && (cbxCon.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(4) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Wisdom.", "Error");
                                 cbxCon.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1074,16 +1027,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxCon.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(2, int.Parse(cbxCon.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(2) < 10)
-                                        lblConMod.Text = newCharacter.GetAbilityScoreMod(2).ToString();
+                                    if (int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text) < 10)
+                                        lblConMod.Text = CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text)).ToString();
                                     else
-                                        lblConMod.Text = "+" + newCharacter.GetAbilityScoreMod(2);*/
+                                        lblConMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(2, 0);
                                     lblConMod.Text = "+0";
                                 }
                             }
@@ -1091,7 +1041,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 4:
                             if ((cbxCon.SelectedIndex == cbxCha.SelectedIndex) && (cbxCon.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(5) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Charisma.", "Error");
                                 cbxCon.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1099,16 +1049,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxCon.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(2, int.Parse(cbxCon.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(2) < 10)
-                                        lblConMod.Text = newCharacter.GetAbilityScoreMod(2).ToString();
+                                    if (int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text) < 10)
+                                        lblConMod.Text = CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text)).ToString();
                                     else
-                                        lblConMod.Text = "+" + newCharacter.GetAbilityScoreMod(2);*/
+                                        lblConMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem.ToString()) + int.Parse(lblConRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(2, 0);
                                     lblConMod.Text = "+0";
                                 }
                             }
@@ -1157,14 +1104,6 @@ namespace CharacterCreator3._5e_WithForm
 
             if (menuLvl == 101)
             {
-                /* Index of Str Ability = 0
-             * Index of Dex Ability = 1
-             * Index of Con Ability = 2
-             * Index of Int Ability = 3
-             * Index of Wis Ability = 4
-             * Index of Cha Ability = 5
-             */
-
                 for (int i = 0; i < 5; i++)
                 {
                     switch (i)
@@ -1172,7 +1111,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 0:
                             if ((cbxInt.SelectedIndex == cbxStr.SelectedIndex) && (cbxInt.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(0) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Strength.", "Error");
                                 cbxInt.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1180,17 +1119,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxInt.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(3, int.Parse(cbxInt.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(3) < 10)
-                                        lblIntMod.Text = newCharacter.GetAbilityScoreMod(3).ToString();
+                                    if (int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text) < 10)
+                                        lblIntMod.Text = CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text)).ToString();
                                     else
-                                        lblIntMod.Text = "+" + newCharacter.GetAbilityScoreMod(3);
-                                    */
+                                        lblIntMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(3, 0);
                                     lblIntMod.Text = "+0";
                                 }
                             }
@@ -1198,7 +1133,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 1:
                             if ((cbxInt.SelectedIndex == cbxDex.SelectedIndex) && (cbxInt.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(1) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Dexterity.", "Error");
                                 cbxInt.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1206,17 +1141,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxInt.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(3, int.Parse(cbxInt.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(3) < 10)
-                                        lblIntMod.Text = newCharacter.GetAbilityScoreMod(3).ToString();
+                                    if (int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text) < 10)
+                                        lblIntMod.Text = CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text)).ToString();
                                     else
-                                        lblIntMod.Text = "+" + newCharacter.GetAbilityScoreMod(3);
-                                    */
+                                        lblIntMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(3, 0);
                                     lblIntMod.Text = "+0";
                                 }
                             }
@@ -1224,7 +1155,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 2:
                             if ((cbxInt.SelectedIndex == cbxCon.SelectedIndex) && (cbxInt.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(2) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Constitution.", "Error");
                                 cbxInt.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1232,17 +1163,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxInt.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(3, int.Parse(cbxInt.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(3) < 10)
-                                        lblIntMod.Text = newCharacter.GetAbilityScoreMod(3).ToString();
+                                    if (int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text) < 10)
+                                        lblIntMod.Text = CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text)).ToString();
                                     else
-                                        lblIntMod.Text = "+" + newCharacter.GetAbilityScoreMod(3);
-                                    */
+                                        lblIntMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(3, 0);
                                     lblIntMod.Text = "+0";
                                 }
                             }
@@ -1250,7 +1177,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 3:
                             if ((cbxInt.SelectedIndex == cbxWis.SelectedIndex) && (cbxInt.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(4) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Wisdom.", "Error");
                                 cbxInt.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1258,17 +1185,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxInt.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(3, int.Parse(cbxInt.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(3) < 10)
-                                        lblIntMod.Text = newCharacter.GetAbilityScoreMod(3).ToString();
+                                    if (int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text) < 10)
+                                        lblIntMod.Text = CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text)).ToString();
                                     else
-                                        lblIntMod.Text = "+" + newCharacter.GetAbilityScoreMod(3);
-                                    */
+                                        lblIntMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(3, 0);
                                     lblIntMod.Text = "+0";
                                 }
                             }
@@ -1276,7 +1199,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 4:
                             if ((cbxInt.SelectedIndex == cbxCha.SelectedIndex) && (cbxInt.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(5) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Charisma.", "Error");
                                 cbxInt.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1284,17 +1207,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxInt.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(3, int.Parse(cbxInt.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(3) < 10)
-                                        lblIntMod.Text = newCharacter.GetAbilityScoreMod(3).ToString();
+                                    if (int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text) < 10)
+                                        lblIntMod.Text = CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text)).ToString();
                                     else
-                                        lblIntMod.Text = "+" + newCharacter.GetAbilityScoreMod(3);
-                                    */
+                                        lblIntMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem.ToString()) + int.Parse(lblIntRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(3, 0);
                                     lblIntMod.Text = "+0";
                                 }
                             }
@@ -1343,14 +1262,6 @@ namespace CharacterCreator3._5e_WithForm
 
             if (menuLvl == 101)
             {
-                /* Index of Str Ability = 0
-             * Index of Dex Ability = 1
-             * Index of Con Ability = 2
-             * Index of Int Ability = 3
-             * Index of Wis Ability = 4
-             * Index of Cha Ability = 5
-             */
-
                 for (int i = 0; i < 5; i++)
                 {
                     switch (i)
@@ -1358,7 +1269,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 0:
                             if ((cbxWis.SelectedIndex == cbxStr.SelectedIndex) && (cbxWis.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(0) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Strength.", "Error");
                                 cbxWis.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1366,17 +1277,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxWis.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(4, int.Parse(cbxWis.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(4) < 10)
-                                        lblWisMod.Text = newCharacter.GetAbilityScoreMod(4).ToString();
+                                    if (int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text) < 10)
+                                        lblWisMod.Text = CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text)).ToString();
                                     else
-                                        lblWisMod.Text = "+" + newCharacter.GetAbilityScoreMod(4);
-                                    */
+                                        lblWisMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(4, 0);
                                     lblWisMod.Text = "+0";
                                 }
                             }
@@ -1384,7 +1291,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 1:
                             if ((cbxWis.SelectedIndex == cbxDex.SelectedIndex) && (cbxWis.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(1) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Dexterity.", "Error");
                                 cbxWis.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1392,17 +1299,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxWis.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(4, int.Parse(cbxWis.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(4) < 10)
-                                        lblWisMod.Text = newCharacter.GetAbilityScoreMod(4).ToString();
+                                    if (int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text) < 10)
+                                        lblWisMod.Text = CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text)).ToString();
                                     else
-                                        lblWisMod.Text = "+" + newCharacter.GetAbilityScoreMod(4);
-                                    */
+                                        lblWisMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(4, 0);
                                     lblWisMod.Text = "+0";
                                 }
                             }
@@ -1410,7 +1313,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 2:
                             if ((cbxWis.SelectedIndex == cbxCon.SelectedIndex) && (cbxWis.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(2) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Constitution.", "Error");
                                 cbxWis.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1418,17 +1321,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxWis.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(4, int.Parse(cbxWis.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(4) < 10)
-                                        lblWisMod.Text = newCharacter.GetAbilityScoreMod(4).ToString();
+                                    if (int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text) < 10)
+                                        lblWisMod.Text = CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text)).ToString();
                                     else
-                                        lblWisMod.Text = "+" + newCharacter.GetAbilityScoreMod(4);
-                                    */
+                                        lblWisMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(4, 0);
                                     lblWisMod.Text = "+0";
                                 }
                             }
@@ -1436,7 +1335,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 3:
                             if ((cbxWis.SelectedIndex == cbxInt.SelectedIndex) && (cbxWis.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(3) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Intelligence.", "Error");
                                 cbxWis.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1444,17 +1343,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxWis.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(4, int.Parse(cbxWis.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(4) < 10)
-                                        lblWisMod.Text = newCharacter.GetAbilityScoreMod(4).ToString();
+                                    if (int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text) < 10)
+                                        lblWisMod.Text = CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text)).ToString();
                                     else
-                                        lblWisMod.Text = "+" + newCharacter.GetAbilityScoreMod(4);
-                                    */
+                                        lblWisMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(4, 0);
                                     lblWisMod.Text = "+0";
                                 }
                             }
@@ -1462,7 +1357,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 4:
                             if ((cbxWis.SelectedIndex == cbxCha.SelectedIndex) && (cbxWis.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(5) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Charisma.", "Error");
                                 cbxWis.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1470,17 +1365,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxWis.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(4, int.Parse(cbxWis.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(4) < 10)
-                                        lblWisMod.Text = newCharacter.GetAbilityScoreMod(4).ToString();
+                                    if (int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text) < 10)
+                                        lblWisMod.Text = CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text)).ToString();
                                     else
-                                        lblWisMod.Text = "+" + newCharacter.GetAbilityScoreMod(4);
-                                    */
+                                        lblWisMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem.ToString()) + int.Parse(lblWisRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(4, 0);
                                     lblWisMod.Text = "+0";
                                 }
                             }
@@ -1529,14 +1420,6 @@ namespace CharacterCreator3._5e_WithForm
 
             if (menuLvl == 101)
             {
-                /* Index of Str Ability = 0
-             * Index of Dex Ability = 1
-             * Index of Con Ability = 2
-             * Index of Int Ability = 3
-             * Index of Wis Ability = 4
-             * Index of Cha Ability = 5
-             */
-
                 for (int i = 0; i < 5; i++)
                 {
                     switch (i)
@@ -1544,7 +1427,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 0:
                             if ((cbxCha.SelectedIndex == cbxStr.SelectedIndex) && (cbxCha.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(0) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Strength.", "Error");
                                 cbxCha.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1552,17 +1435,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxCha.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(5, int.Parse(cbxCha.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(5) < 10)
-                                        lblChaMod.Text = newCharacter.GetAbilityScoreMod(5).ToString();
+                                    if (int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text) < 10)
+                                        lblChaMod.Text = CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text)).ToString();
                                     else
-                                        lblChaMod.Text = "+" + newCharacter.GetAbilityScoreMod(5);
-                                    */
+                                        lblChaMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(5, 0);
                                     lblChaMod.Text = "+0";
                                 }
                             }
@@ -1570,7 +1449,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 1:
                             if ((cbxCha.SelectedIndex == cbxDex.SelectedIndex) && (cbxCha.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(1) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Dexterity.", "Error");
                                 cbxCha.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1578,17 +1457,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxCha.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(5, int.Parse(cbxCha.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(5) < 10)
-                                        lblChaMod.Text = newCharacter.GetAbilityScoreMod(5).ToString();
+                                    if (int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text) < 10)
+                                        lblChaMod.Text = CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text)).ToString();
                                     else
-                                        lblChaMod.Text = "+" + newCharacter.GetAbilityScoreMod(5);
-                                    */
+                                        lblChaMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(5, 0);
                                     lblChaMod.Text = "+0";
                                 }
                             }
@@ -1596,7 +1471,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 2:
                             if ((cbxCha.SelectedIndex == cbxCon.SelectedIndex) && (cbxCha.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(2) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Constitution.", "Error");
                                 cbxCha.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1604,17 +1479,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxCha.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(5, int.Parse(cbxCha.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(5) < 10)
-                                        lblChaMod.Text = newCharacter.GetAbilityScoreMod(5).ToString();
+                                    if (int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text) < 10)
+                                        lblChaMod.Text = CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text)).ToString();
                                     else
-                                        lblChaMod.Text = "+" + newCharacter.GetAbilityScoreMod(5);
-                                    */
+                                        lblChaMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(5, 0);
                                     lblChaMod.Text = "+0";
                                 }
                             }
@@ -1622,7 +1493,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 3:
                             if ((cbxCha.SelectedIndex == cbxInt.SelectedIndex) && (cbxCha.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(3) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Intelligence.", "Error");
                                 cbxCha.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1630,17 +1501,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxCha.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(5, int.Parse(cbxCha.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(5) < 10)
-                                        lblChaMod.Text = newCharacter.GetAbilityScoreMod(5).ToString();
+                                    if (int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text) < 10)
+                                        lblChaMod.Text = CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text)).ToString();
                                     else
-                                        lblChaMod.Text = "+" + newCharacter.GetAbilityScoreMod(5);
-                                    */
+                                        lblChaMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(5, 0);
                                     lblChaMod.Text = "+0";
                                 }
                             }
@@ -1648,7 +1515,7 @@ namespace CharacterCreator3._5e_WithForm
                         case 4:
                             if ((cbxCha.SelectedIndex == cbxWis.SelectedIndex) && (cbxCha.SelectedIndex != 0))
                             {
-                                //MessageBox.Show("Values cannot be reused. This value is already used by " + newCharacter.GetAbilityScoreName(4) + ".", "Error");
+                                MessageBox.Show("Values cannot be reused. This value is already used by Wisdom.", "Error");
                                 cbxCha.SelectedIndex = 0;
                                 i = 5;
                             }
@@ -1656,17 +1523,13 @@ namespace CharacterCreator3._5e_WithForm
                             {
                                 if (cbxCha.SelectedIndex > 0)
                                 {
-                                    /*
-                                    newCharacter.SetAbilityScoreVal(5, int.Parse(cbxCha.SelectedItem.ToString()));
-                                    if (newCharacter.GetAbilityScoreVal(5) < 10)
-                                        lblChaMod.Text = newCharacter.GetAbilityScoreMod(5).ToString();
+                                    if (int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text) < 10)
+                                        lblChaMod.Text = CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text)).ToString();
                                     else
-                                        lblChaMod.Text = "+" + newCharacter.GetAbilityScoreMod(5);
-                                    */
+                                        lblChaMod.Text = "+" + CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem.ToString()) + int.Parse(lblChaRacialAdjust.Text)).ToString();
                                 }
                                 else
                                 {
-                                    //newCharacter.SetAbilityScoreVal(5, 0);
                                     lblChaMod.Text = "+0";
                                 }
                             }
@@ -1713,51 +1576,21 @@ namespace CharacterCreator3._5e_WithForm
             DataRow search = races.Rows.Find(100);
             DataRow select;
 
-            for (int i = 100; i < 107; i++)
-            {
-                search = races.Rows.Find(i);
-                if (cbxRace.SelectedItem == search.Field<string>("RaceName"))
-                    break;
-            }
-            select = search;
-            /*
+
             if (cbxRace.SelectedIndex == 0)
             {
-                for (int i = 100; i < 107; i++)
-                {
-                    search = races.Rows.Find(i);
-                    if (newCharacter.GetCharacterRaceName() == search.Field<string>("RaceName"))
-                        break;
-                }
-                select = search;
-                for (int i = 0; i < newCharacter.GetAbilityScoresLength(); i++)
-                {
-                    switch (i)
-                    {
-                        case 0:
-                            newCharacter.SetAdjustRacial(i, -select.Field<int>("AdjustStr"));
-                            break;
-                        case 1:
-                            newCharacter.SetAdjustRacial(i, -select.Field<int>("AdjustDex"));
-                            break;
-                        case 2:
-                            newCharacter.SetAdjustRacial(i, -select.Field<int>("AdjustCon"));
-                            break;
-                        case 3:
-                            newCharacter.SetAdjustRacial(i, -select.Field<int>("AdjustInt"));
-                            break;
-                        case 4:
-                            newCharacter.SetAdjustRacial(i, -select.Field<int>("AdjustWis"));
-                            break;
-                        case 5:
-                            newCharacter.SetAdjustRacial(i, -select.Field<int>("AdjustCha"));
-                            break;
-                    }
-                }
-                newCharacter.SetCharacterRaceName("");
-                newCharacter.SetCharacterFavoriteClass("");
-                newCharacter.SetCharacterSize("");
-                newCharacter.SetCharacterSpeed(0);
+                lblStrRacialAdjust.Text = "0";
+                lblDexRacialAdjust.Text = "0";
+                lblConRacialAdjust.Text = "0";
+                lblIntRacialAdjust.Text = "0";
+                lblWisRacialAdjust.Text = "0";
+                lblChaRacialAdjust.Text = "0";
+                lblStrMod.Text = CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem?.ToString() ?? "0")).ToString();
+                lblDexMod.Text = CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem?.ToString() ?? "0")).ToString();
+                lblConMod.Text = CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem?.ToString() ?? "0")).ToString();
+                lblIntMod.Text = CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem?.ToString() ?? "0")).ToString();
+                lblWisMod.Text = CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem?.ToString() ?? "0")).ToString();
+                lblChaMod.Text = CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem?.ToString() ?? "0")).ToString();
             }
             else
             {
@@ -1768,50 +1601,23 @@ namespace CharacterCreator3._5e_WithForm
                         break;
                 }
                 select = search;
-                for (int i = 0; i < newCharacter.GetAbilityScoresLength(); i++)
-                {
-                    switch (i)
-                    {
-                        case 0:
-                            newCharacter.SetAdjustRacial(i, select.Field<int>("AdjustStr"));
-                            break;
-                        case 1:
-                            newCharacter.SetAdjustRacial(i, select.Field<int>("AdjustDex"));
-                            break;
-                        case 2:
-                            newCharacter.SetAdjustRacial(i, select.Field<int>("AdjustCon"));
-                            break;
-                        case 3:
-                            newCharacter.SetAdjustRacial(i, select.Field<int>("AdjustInt"));
-                            break;
-                        case 4:
-                            newCharacter.SetAdjustRacial(i, select.Field<int>("AdjustWis"));
-                            break;
-                        case 5:
-                            newCharacter.SetAdjustRacial(i, select.Field<int>("AdjustCha"));
-                            break;
-                    }
-                }
-                newCharacter.SetCharacterRaceName(select.Field<string>("RaceName"));
-                newCharacter.SetCharacterFavoriteClass(select.Field<string>("FavoriteClass"));
-                newCharacter.SetCharacterSize(select.Field<string>("Size"));
-                newCharacter.SetCharacterSpeed(select.Field<int>("Speed"));
-            }*/
 
-            //Displays racial adjustment to ability scores
-            lblStrRacialAdjust.Text = select.Field<int>("AdjustStr").ToString();
-            lblDexRacialAdjust.Text = select.Field<int>("AdjustDex").ToString();
-            lblConRacialAdjust.Text = select.Field<int>("AdjustCon").ToString();
-            lblIntRacialAdjust.Text = select.Field<int>("AdjustInt").ToString();
-            lblWisRacialAdjust.Text = select.Field<int>("AdjustWis").ToString();
-            lblChaRacialAdjust.Text = select.Field<int>("AdjustCha").ToString();
+                //Displays racial adjustment to ability scores
+                lblStrRacialAdjust.Text = select.Field<int>("AdjustStr").ToString();
+                lblDexRacialAdjust.Text = select.Field<int>("AdjustDex").ToString();
+                lblConRacialAdjust.Text = select.Field<int>("AdjustCon").ToString();
+                lblIntRacialAdjust.Text = select.Field<int>("AdjustInt").ToString();
+                lblWisRacialAdjust.Text = select.Field<int>("AdjustWis").ToString();
+                lblChaRacialAdjust.Text = select.Field<int>("AdjustCha").ToString();
+                lblStrMod.Text = CalcAbilityScoreMod(int.Parse(cbxStr.SelectedItem?.ToString() ?? "0") + select.Field<int>("AdjustStr")).ToString();
+                lblDexMod.Text = CalcAbilityScoreMod(int.Parse(cbxDex.SelectedItem?.ToString() ?? "0") + select.Field<int>("AdjustStr")).ToString();
+                lblConMod.Text = CalcAbilityScoreMod(int.Parse(cbxCon.SelectedItem?.ToString() ?? "0") + select.Field<int>("AdjustStr")).ToString();
+                lblIntMod.Text = CalcAbilityScoreMod(int.Parse(cbxInt.SelectedItem?.ToString() ?? "0") + select.Field<int>("AdjustStr")).ToString();
+                lblWisMod.Text = CalcAbilityScoreMod(int.Parse(cbxWis.SelectedItem?.ToString() ?? "0") + select.Field<int>("AdjustStr")).ToString();
+                lblChaMod.Text = CalcAbilityScoreMod(int.Parse(cbxCha.SelectedItem?.ToString() ?? "0") + select.Field<int>("AdjustStr")).ToString();
+            }
             /*
-            lblStrMod.Text = newCharacter.GetAbilityScoreMod(0).ToString();
-            lblDexMod.Text = newCharacter.GetAbilityScoreMod(1).ToString();
-            lblConMod.Text = newCharacter.GetAbilityScoreMod(2).ToString();
-            lblIntMod.Text = newCharacter.GetAbilityScoreMod(3).ToString();
-            lblWisMod.Text = newCharacter.GetAbilityScoreMod(4).ToString();
-            lblChaMod.Text = newCharacter.GetAbilityScoreMod(5).ToString();
+            
             */
         }
 
