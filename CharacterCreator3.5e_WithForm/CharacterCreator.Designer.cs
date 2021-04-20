@@ -65,6 +65,38 @@ namespace CharacterCreator3._5e_WithForm
             this.lblConRacialAdjust = new System.Windows.Forms.Label();
             this.lblDexRacialAdjust = new System.Windows.Forms.Label();
             this.lblStrRacialAdjust = new System.Windows.Forms.Label();
+            this.lblClassHeader = new System.Windows.Forms.Label();
+            this.cbxClasses = new System.Windows.Forms.ComboBox();
+            this.tbcSelectedClasses = new System.Windows.Forms.TabControl();
+            this.tbpBarbarian = new System.Windows.Forms.TabPage();
+            this.btnAddClass = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbpFighter = new System.Windows.Forms.TabPage();
+            this.tbpMonk = new System.Windows.Forms.TabPage();
+            this.tbpRogue = new System.Windows.Forms.TabPage();
+            this.btnDelBarbarian = new System.Windows.Forms.Button();
+            this.btnDelFighter = new System.Windows.Forms.Button();
+            this.btnDelMonk = new System.Windows.Forms.Button();
+            this.btnDelRogue = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.lblBarbarianLvl = new System.Windows.Forms.Label();
+            this.nudBarbarianLvl = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblFighterLvl = new System.Windows.Forms.Label();
+            this.nudFighterLvl = new System.Windows.Forms.NumericUpDown();
+            this.nudMonkLvl = new System.Windows.Forms.NumericUpDown();
+            this.lblMonkLvl = new System.Windows.Forms.Label();
+            this.nudRogueLvl = new System.Windows.Forms.NumericUpDown();
+            this.lblRogueLvl = new System.Windows.Forms.Label();
+            this.tbcSelectedClasses.SuspendLayout();
+            this.tbpBarbarian.SuspendLayout();
+            this.tbpFighter.SuspendLayout();
+            this.tbpMonk.SuspendLayout();
+            this.tbpRogue.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBarbarianLvl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFighterLvl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonkLvl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRogueLvl)).BeginInit();
             this.SuspendLayout();
             // 
             // btnNewCharacter
@@ -161,7 +193,7 @@ namespace CharacterCreator3._5e_WithForm
             // cbxRace
             // 
             this.cbxRace.FormattingEnabled = true;
-            this.cbxRace.Location = new System.Drawing.Point(53, 228);
+            this.cbxRace.Location = new System.Drawing.Point(66, 228);
             this.cbxRace.Name = "cbxRace";
             this.cbxRace.Size = new System.Drawing.Size(121, 21);
             this.cbxRace.TabIndex = 9;
@@ -428,11 +460,275 @@ namespace CharacterCreator3._5e_WithForm
             this.lblStrRacialAdjust.Text = "+0";
             this.lblStrRacialAdjust.Visible = false;
             // 
+            // lblClassHeader
+            // 
+            this.lblClassHeader.AutoSize = true;
+            this.lblClassHeader.Location = new System.Drawing.Point(12, 545);
+            this.lblClassHeader.Name = "lblClassHeader";
+            this.lblClassHeader.Size = new System.Drawing.Size(46, 13);
+            this.lblClassHeader.TabIndex = 36;
+            this.lblClassHeader.Text = "Classes:";
+            // 
+            // cbxClasses
+            // 
+            this.cbxClasses.FormattingEnabled = true;
+            this.cbxClasses.Location = new System.Drawing.Point(63, 542);
+            this.cbxClasses.Name = "cbxClasses";
+            this.cbxClasses.Size = new System.Drawing.Size(124, 21);
+            this.cbxClasses.TabIndex = 37;
+            this.cbxClasses.Visible = false;
+            // 
+            // tbcSelectedClasses
+            // 
+            this.tbcSelectedClasses.Controls.Add(this.tbpBarbarian);
+            this.tbcSelectedClasses.Controls.Add(this.tbpFighter);
+            this.tbcSelectedClasses.Controls.Add(this.tbpMonk);
+            this.tbcSelectedClasses.Controls.Add(this.tbpRogue);
+            this.tbcSelectedClasses.Location = new System.Drawing.Point(193, 63);
+            this.tbcSelectedClasses.Name = "tbcSelectedClasses";
+            this.tbcSelectedClasses.SelectedIndex = 0;
+            this.tbcSelectedClasses.Size = new System.Drawing.Size(350, 536);
+            this.tbcSelectedClasses.TabIndex = 38;
+            // 
+            // tbpBarbarian
+            // 
+            this.tbpBarbarian.Controls.Add(this.nudBarbarianLvl);
+            this.tbpBarbarian.Controls.Add(this.lblBarbarianLvl);
+            this.tbpBarbarian.Controls.Add(this.btnDelBarbarian);
+            this.tbpBarbarian.Location = new System.Drawing.Point(4, 22);
+            this.tbpBarbarian.Name = "tbpBarbarian";
+            this.tbpBarbarian.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpBarbarian.Size = new System.Drawing.Size(342, 510);
+            this.tbpBarbarian.TabIndex = 0;
+            this.tbpBarbarian.Text = "Barbarian";
+            this.tbpBarbarian.UseVisualStyleBackColor = true;
+            // 
+            // btnAddClass
+            // 
+            this.btnAddClass.Location = new System.Drawing.Point(63, 569);
+            this.btnAddClass.Name = "btnAddClass";
+            this.btnAddClass.Size = new System.Drawing.Size(124, 23);
+            this.btnAddClass.TabIndex = 39;
+            this.btnAddClass.Text = "+";
+            this.btnAddClass.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 255);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(175, 281);
+            this.textBox1.TabIndex = 41;
+            // 
+            // tbpFighter
+            // 
+            this.tbpFighter.Controls.Add(this.nudFighterLvl);
+            this.tbpFighter.Controls.Add(this.lblFighterLvl);
+            this.tbpFighter.Controls.Add(this.label1);
+            this.tbpFighter.Controls.Add(this.btnDelFighter);
+            this.tbpFighter.Location = new System.Drawing.Point(4, 22);
+            this.tbpFighter.Name = "tbpFighter";
+            this.tbpFighter.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpFighter.Size = new System.Drawing.Size(342, 510);
+            this.tbpFighter.TabIndex = 1;
+            this.tbpFighter.Text = "Fighter";
+            this.tbpFighter.UseVisualStyleBackColor = true;
+            // 
+            // tbpMonk
+            // 
+            this.tbpMonk.Controls.Add(this.nudMonkLvl);
+            this.tbpMonk.Controls.Add(this.lblMonkLvl);
+            this.tbpMonk.Controls.Add(this.btnDelMonk);
+            this.tbpMonk.Location = new System.Drawing.Point(4, 22);
+            this.tbpMonk.Name = "tbpMonk";
+            this.tbpMonk.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpMonk.Size = new System.Drawing.Size(342, 510);
+            this.tbpMonk.TabIndex = 2;
+            this.tbpMonk.Text = "Monk";
+            this.tbpMonk.UseVisualStyleBackColor = true;
+            // 
+            // tbpRogue
+            // 
+            this.tbpRogue.Controls.Add(this.nudRogueLvl);
+            this.tbpRogue.Controls.Add(this.lblRogueLvl);
+            this.tbpRogue.Controls.Add(this.btnDelRogue);
+            this.tbpRogue.Location = new System.Drawing.Point(4, 22);
+            this.tbpRogue.Name = "tbpRogue";
+            this.tbpRogue.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpRogue.Size = new System.Drawing.Size(342, 510);
+            this.tbpRogue.TabIndex = 3;
+            this.tbpRogue.Text = "Rogue";
+            this.tbpRogue.UseVisualStyleBackColor = true;
+            // 
+            // btnDelBarbarian
+            // 
+            this.btnDelBarbarian.Location = new System.Drawing.Point(261, 6);
+            this.btnDelBarbarian.Name = "btnDelBarbarian";
+            this.btnDelBarbarian.Size = new System.Drawing.Size(75, 23);
+            this.btnDelBarbarian.TabIndex = 0;
+            this.btnDelBarbarian.Text = "Delete";
+            this.btnDelBarbarian.UseVisualStyleBackColor = true;
+            // 
+            // btnDelFighter
+            // 
+            this.btnDelFighter.Location = new System.Drawing.Point(261, 6);
+            this.btnDelFighter.Name = "btnDelFighter";
+            this.btnDelFighter.Size = new System.Drawing.Size(75, 23);
+            this.btnDelFighter.TabIndex = 1;
+            this.btnDelFighter.Text = "Delete";
+            this.btnDelFighter.UseVisualStyleBackColor = true;
+            // 
+            // btnDelMonk
+            // 
+            this.btnDelMonk.Location = new System.Drawing.Point(261, 6);
+            this.btnDelMonk.Name = "btnDelMonk";
+            this.btnDelMonk.Size = new System.Drawing.Size(75, 23);
+            this.btnDelMonk.TabIndex = 1;
+            this.btnDelMonk.Text = "Delete";
+            this.btnDelMonk.UseVisualStyleBackColor = true;
+            // 
+            // btnDelRogue
+            // 
+            this.btnDelRogue.Location = new System.Drawing.Point(261, 6);
+            this.btnDelRogue.Name = "btnDelRogue";
+            this.btnDelRogue.Size = new System.Drawing.Size(75, 23);
+            this.btnDelRogue.TabIndex = 1;
+            this.btnDelRogue.Text = "Delete";
+            this.btnDelRogue.UseVisualStyleBackColor = true;
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.Location = new System.Drawing.Point(545, 566);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(177, 23);
+            this.btnCreate.TabIndex = 1;
+            this.btnCreate.Text = "Create";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            // 
+            // lblBarbarianLvl
+            // 
+            this.lblBarbarianLvl.AutoSize = true;
+            this.lblBarbarianLvl.Location = new System.Drawing.Point(6, 11);
+            this.lblBarbarianLvl.Name = "lblBarbarianLvl";
+            this.lblBarbarianLvl.Size = new System.Drawing.Size(36, 13);
+            this.lblBarbarianLvl.TabIndex = 1;
+            this.lblBarbarianLvl.Text = "Level:";
+            // 
+            // nudBarbarianLvl
+            // 
+            this.nudBarbarianLvl.Location = new System.Drawing.Point(48, 6);
+            this.nudBarbarianLvl.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudBarbarianLvl.Name = "nudBarbarianLvl";
+            this.nudBarbarianLvl.Size = new System.Drawing.Size(33, 20);
+            this.nudBarbarianLvl.TabIndex = 2;
+            this.nudBarbarianLvl.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Levels:";
+            // 
+            // lblFighterLvl
+            // 
+            this.lblFighterLvl.AutoSize = true;
+            this.lblFighterLvl.Location = new System.Drawing.Point(6, 11);
+            this.lblFighterLvl.Name = "lblFighterLvl";
+            this.lblFighterLvl.Size = new System.Drawing.Size(36, 13);
+            this.lblFighterLvl.TabIndex = 3;
+            this.lblFighterLvl.Text = "Level:";
+            // 
+            // nudFighterLvl
+            // 
+            this.nudFighterLvl.Location = new System.Drawing.Point(48, 6);
+            this.nudFighterLvl.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFighterLvl.Name = "nudFighterLvl";
+            this.nudFighterLvl.Size = new System.Drawing.Size(33, 20);
+            this.nudFighterLvl.TabIndex = 4;
+            this.nudFighterLvl.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // nudMonkLvl
+            // 
+            this.nudMonkLvl.Location = new System.Drawing.Point(48, 6);
+            this.nudMonkLvl.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudMonkLvl.Name = "nudMonkLvl";
+            this.nudMonkLvl.Size = new System.Drawing.Size(33, 20);
+            this.nudMonkLvl.TabIndex = 4;
+            this.nudMonkLvl.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // lblMonkLvl
+            // 
+            this.lblMonkLvl.AutoSize = true;
+            this.lblMonkLvl.Location = new System.Drawing.Point(6, 11);
+            this.lblMonkLvl.Name = "lblMonkLvl";
+            this.lblMonkLvl.Size = new System.Drawing.Size(36, 13);
+            this.lblMonkLvl.TabIndex = 3;
+            this.lblMonkLvl.Text = "Level:";
+            // 
+            // nudRogueLvl
+            // 
+            this.nudRogueLvl.Location = new System.Drawing.Point(48, 6);
+            this.nudRogueLvl.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudRogueLvl.Name = "nudRogueLvl";
+            this.nudRogueLvl.Size = new System.Drawing.Size(33, 20);
+            this.nudRogueLvl.TabIndex = 4;
+            this.nudRogueLvl.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // lblRogueLvl
+            // 
+            this.lblRogueLvl.AutoSize = true;
+            this.lblRogueLvl.Location = new System.Drawing.Point(6, 11);
+            this.lblRogueLvl.Name = "lblRogueLvl";
+            this.lblRogueLvl.Size = new System.Drawing.Size(36, 13);
+            this.lblRogueLvl.TabIndex = 3;
+            this.lblRogueLvl.Text = "Level:";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 611);
+            this.Controls.Add(this.btnCreate);
+            this.Controls.Add(this.tbcSelectedClasses);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnAddClass);
+            this.Controls.Add(this.cbxClasses);
+            this.Controls.Add(this.lblClassHeader);
             this.Controls.Add(this.lblChaRacialAdjust);
             this.Controls.Add(this.lblWisRacialAdjust);
             this.Controls.Add(this.lblIntRacialAdjust);
@@ -472,6 +768,19 @@ namespace CharacterCreator3._5e_WithForm
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmMain";
             this.Text = "Character Creator";
+            this.tbcSelectedClasses.ResumeLayout(false);
+            this.tbpBarbarian.ResumeLayout(false);
+            this.tbpBarbarian.PerformLayout();
+            this.tbpFighter.ResumeLayout(false);
+            this.tbpFighter.PerformLayout();
+            this.tbpMonk.ResumeLayout(false);
+            this.tbpMonk.PerformLayout();
+            this.tbpRogue.ResumeLayout(false);
+            this.tbpRogue.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBarbarianLvl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFighterLvl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonkLvl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRogueLvl)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -515,6 +824,29 @@ namespace CharacterCreator3._5e_WithForm
         private System.Windows.Forms.Label lblConRacialAdjust;
         private System.Windows.Forms.Label lblDexRacialAdjust;
         private System.Windows.Forms.Label lblStrRacialAdjust;
+        private System.Windows.Forms.Label lblClassHeader;
+        private System.Windows.Forms.ComboBox cbxClasses;
+        private System.Windows.Forms.TabControl tbcSelectedClasses;
+        private System.Windows.Forms.TabPage tbpBarbarian;
+        private System.Windows.Forms.Button btnAddClass;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TabPage tbpFighter;
+        private System.Windows.Forms.TabPage tbpMonk;
+        private System.Windows.Forms.TabPage tbpRogue;
+        private System.Windows.Forms.NumericUpDown nudBarbarianLvl;
+        private System.Windows.Forms.Label lblBarbarianLvl;
+        private System.Windows.Forms.Button btnDelBarbarian;
+        private System.Windows.Forms.NumericUpDown nudFighterLvl;
+        private System.Windows.Forms.Label lblFighterLvl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnDelFighter;
+        private System.Windows.Forms.NumericUpDown nudMonkLvl;
+        private System.Windows.Forms.Label lblMonkLvl;
+        private System.Windows.Forms.Button btnDelMonk;
+        private System.Windows.Forms.NumericUpDown nudRogueLvl;
+        private System.Windows.Forms.Label lblRogueLvl;
+        private System.Windows.Forms.Button btnDelRogue;
+        private System.Windows.Forms.Button btnCreate;
     }
 }
 

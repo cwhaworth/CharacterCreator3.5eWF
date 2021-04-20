@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Character.cs" />
-    <Compile Include="CharacterClass.cs" />
+    <Compile Include="AbstractClasses.cs" />
     <Compile Include="CharacterCreator.cs">
       <SubType>Form</SubType>
     </Compile>
