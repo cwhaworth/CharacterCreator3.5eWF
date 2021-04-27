@@ -105,7 +105,9 @@ namespace CharacterCreator3._5e_WithForm
             lblIntRacialAdjust.Show();
             lblWisRacialAdjust.Show();
             lblChaRacialAdjust.Show();
+            lblClassHeader.Show();
             txtCharacterName.Show();
+            txtRacialTraits.Show();
             cbxStr.Show();
             cbxDex.Show();
             cbxCon.Show();
@@ -113,6 +115,7 @@ namespace CharacterCreator3._5e_WithForm
             cbxWis.Show();
             cbxCha.Show();
             cbxRace.Show();
+            cbxClasses.Show();
             cbxStr.Enabled = true;
             cbxDex.Enabled = true;
             cbxCon.Enabled = true;
@@ -120,6 +123,10 @@ namespace CharacterCreator3._5e_WithForm
             cbxWis.Enabled = true;
             cbxCha.Enabled = true;
             cbxRace.Enabled = true;
+            cbxClasses.Enabled = true;
+            btnAddClass.Show();
+            btnCreate.Show();
+            tbcSelectedClasses.Show();
             newCharUI = true;
         }
 
@@ -155,7 +162,9 @@ namespace CharacterCreator3._5e_WithForm
             lblIntRacialAdjust.Hide();
             lblWisRacialAdjust.Hide();
             lblChaRacialAdjust.Hide();
+            lblClassHeader.Hide();
             txtCharacterName.Hide();
+            txtRacialTraits.Hide();
             cbxStr.Hide();
             cbxDex.Hide();
             cbxCon.Hide();
@@ -163,6 +172,7 @@ namespace CharacterCreator3._5e_WithForm
             cbxWis.Hide();
             cbxCha.Hide();
             cbxRace.Hide();
+            cbxClasses.Hide();
             cbxStr.Text = "";
             cbxDex.Text = "";
             cbxCon.Text = "";
@@ -170,6 +180,10 @@ namespace CharacterCreator3._5e_WithForm
             cbxWis.Text = "";
             cbxCha.Text = "";
             cbxRace.Text = "";
+            cbxClasses.Text = "";
+            btnAddClass.Hide();
+            btnCreate.Hide();
+            tbcSelectedClasses.Hide();
             newCharUI = false;
         }
         
@@ -451,12 +465,12 @@ namespace CharacterCreator3._5e_WithForm
             cbxInt.Items.Clear();
             cbxWis.Items.Clear();
             cbxCha.Items.Clear();
-            cbxStr.Items.Add(null);
-            cbxDex.Items.Add(null);
-            cbxCon.Items.Add(null);
-            cbxInt.Items.Add(null);
-            cbxWis.Items.Add(null);
-            cbxCha.Items.Add(null);
+            cbxStr.Items.Add("");
+            cbxDex.Items.Add("");
+            cbxCon.Items.Add("");
+            cbxInt.Items.Add("");
+            cbxWis.Items.Add("");
+            cbxCha.Items.Add("");
         }
 
         /* Logic for ability score combo boxes check if a value has been used by 
